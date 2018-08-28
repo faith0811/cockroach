@@ -144,6 +144,21 @@ var oidToArrayOid = map[oid.Oid]oid.Oid{
 	oid.T_timestamptz: oid.T__timestamptz,
 	oid.T_varchar:     oid.T__varchar,
 	oid.T_uuid:        oid.T__uuid,
+	oid.T_int4range:   oid.T__int4range,
+	oid.T_int8range:   oid.T__int8range,
+	oid.T_tsrange:     oid.T__tsrange,
+	oid.T_tstzrange:   oid.T__tstzrange,
+	oid.T_daterange:   oid.T__daterange,
+	oid.T_numrange:    oid.T__numrange,
+}
+
+var oidToRangeOid = map[oid.Oid]oid.Oid{
+	oid.T_int4: oid.T_int4range,
+	oid.T_int8: oid.T_int8range,
+	oid.T_timestamp: oid.T_tsrange,
+	oid.T_timestamptz: oid.T_tstzrange,
+	oid.T_date: oid.T_daterange,
+	oid.T_numeric: oid.T_numrange,
 }
 
 // TOid represents an alias to the Int type with a different Postgres OID.

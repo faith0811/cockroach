@@ -94,6 +94,17 @@ var (
 	// JSON is an immutable T instance.
 	JSON = &TJSON{}
 
+	// INT4RANGE is an immutable T instance.
+	Int4Range = &TRange{Int4}
+	// INT8RANGE is an immutable T instance.
+	Int8Range = &TRange{Int8}
+	// NUMRANGE is an immutable T instance.
+	NumRange = &TRange{Decimal}
+	// INT4RANGE is an immutable T instance.
+	TSRange = &TRange{Timestamp}
+	// INT4RANGE is an immutable T instance.
+	TSTZRange = &TRange{TimestampWithTZ}
+
 	// Oid is an immutable T instance.
 	Oid = &TOid{Name: "OID"}
 	// RegClass is an immutable T instance.

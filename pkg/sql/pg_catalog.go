@@ -1775,7 +1775,6 @@ var (
 	_ = typCategoryComposite
 	_ = typCategoryEnum
 	_ = typCategoryGeometric
-	_ = typCategoryRange
 	_ = typCategoryBitString
 	_ = typCategoryUnknown
 
@@ -2076,6 +2075,8 @@ func typCategory(typ types.T) tree.Datum {
 			return typCategoryPseudo
 		}
 		return typCategoryArray
+	} else if typ.FamilyEqual(types.FamRange) {
+		return typCategoryRange
 	}
 	return datumToTypeCategory[reflect.TypeOf(types.UnwrapType(typ))]
 }

@@ -3005,6 +3005,61 @@ func (d *DArray) Append(v Datum) error {
 	return d.Validate()
 }
 
+type DRange struct {
+	ParamTyp types.T
+
+	Lower Datum
+	Upper Datum
+
+	BlanketType int
+}
+
+func (d *DRange) AmbiguousFormat() bool {
+	return false
+}
+
+func (d *DRange) Compare(ctx *EvalContext, other Datum) int {
+	return 1
+}
+
+func (d *DRange) Prev(ctx *EvalContext) (Datum, bool) {
+	return nil, false
+}
+
+func (d *DRange) IsMin(ctx *EvalContext) bool {
+	return false
+}
+
+func (d *DRange) Next(ctx *EvalContext) (Datum, bool) {
+	return nil, false
+}
+
+func (d *DRange) IsMax(ctx *EvalContext) bool {
+	return false
+}
+
+func (d *DRange) Max(ctx *EvalContext) (Datum, bool) {
+	return nil, false
+}
+
+func (d *DRange) Min(ctx *EvalContext) (Datum, bool) {
+	return nil, false
+}
+
+func (d *DRange) Size() uintptr {
+	return unsafe.Sizeof(*d)
+}
+
+// ResolvedType implements the TypedExpr interface.
+func (d *DRange) ResolvedType() types.T {
+	return types.TRange{Typ: d.ParamTyp}
+}
+
+// Format implements the NodeFormatter interface
+func (d *DRange) Format(ctx *FmtCtx) {
+	
+}
+
 // DOid is the Postgres OID datum. It can represent either an OID type or any
 // of the reg* types, such as regproc or regclass.
 type DOid struct {

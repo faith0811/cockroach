@@ -6297,6 +6297,28 @@ interval_second:
   }
 | SECOND '(' ICONST ')' { return unimplemented(sqllex, "interval_second") }
 
+range_types:
+  INT4RANGE
+  {
+    $$.val = coltypes.Int4Range
+  }
+| INT8RANGE
+  {
+    $$.val = coltypes.Int8Range
+  }
+| NUMRANGE
+  {
+    $$.val = coltypes.NumRange
+  }
+| TSRANGE
+  {
+    $$.val = coltypes.TSRange
+  }
+| TSTZRANGE
+  {
+    $$.val = coltypes.TSTZRange
+  }
+
 // General expressions. This is the heart of the expression syntax.
 //
 // We have two expression types: a_expr is the unrestricted kind, and b_expr is
@@ -8397,12 +8419,15 @@ col_name_keyword:
 | IFERROR
 | IFNULL
 | INT
+| INT4RANGE
+| INT8RANGE
 | INTEGER
 | INTERVAL
 | ISERROR
 | LEAST
 | NULLIF
 | NUMERIC
+| NUMRANGE
 | OUT
 | OVERLAY
 | POSITION
@@ -8414,6 +8439,8 @@ col_name_keyword:
 | TIME
 | TIMETZ
 | TIMESTAMP
+| TSRANGE
+| TSTZRANGE
 | TREAT
 | TRIM
 | VALUES

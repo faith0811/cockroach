@@ -662,6 +662,9 @@ func (expr *DTuple) Walk(_ Visitor) Expr { return expr }
 func (expr *DArray) Walk(_ Visitor) Expr { return expr }
 
 // Walk implements the Expr interface.
+func (expr *DRange) Walk(_ Visitor) Expr { return expr }
+
+// Walk implements the Expr interface.
 func (expr *DOid) Walk(_ Visitor) Expr { return expr }
 
 // Walk implements the Expr interface.

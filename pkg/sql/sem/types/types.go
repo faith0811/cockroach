@@ -109,6 +109,8 @@ var (
 	FamTuple T = TTuple{}
 	// FamArray is the type family of a DArray. CANNOT be compared with ==.
 	FamArray T = TArray{}
+	// FamRange is the type family of a DRange. CANNOT be compared with ==.
+	FamRange T = TRange{}
 	// FamPlaceholder is the type family of a placeholder. CANNOT be compared
 	// with ==.
 	FamPlaceholder T = TPlaceholder{}
@@ -463,6 +465,46 @@ func (a TArray) SQLName() string {
 
 // IsAmbiguous implements the T interface.
 func (a TArray) IsAmbiguous() bool {
+	return a.Typ == nil || a.Typ.IsAmbiguous()
+}
+
+type TRange struct {
+	Typ T
+}
+
+const noRangeType = 0
+
+func (a TRange) String() string {
+	return ""
+}
+
+func (a TRange) Equivalent(other T) bool {
+	if other == Any {
+		return true
+	}
+	if u, ok := UnwrapType(other).(TRange); ok {
+		return a.Typ.Equivalent(u.Typ)
+	}
+	return false
+}
+
+func (TRange) FamilyEqual(other T) bool {
+	_, ok := UnwrapType(other).(TRange)
+	return ok
+}
+
+func (a TRange) Oid() oid.Oid {
+	if o, ok := oidToRangeOid[a.Typ.Oid()]; ok {
+		return o
+	}
+	return noRangeType
+}
+
+func (a TRange) SQLName() string {
+	return a.String()
+}
+
+func (a TRange) IsAmbiguous() bool {
 	return a.Typ == nil || a.Typ.IsAmbiguous()
 }
 

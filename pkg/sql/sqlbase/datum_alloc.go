@@ -35,6 +35,7 @@ type DatumAlloc struct {
 	djsonAlloc        []tree.DJSON
 	dtupleAlloc       []tree.DTuple
 	doidAlloc         []tree.DOid
+	drangeAlloc       []tree.DRange
 	scratch           []byte
 	env               tree.CollationEnvironment
 }
@@ -235,6 +236,18 @@ func (a *DatumAlloc) NewDOid(v tree.DOid) tree.Datum {
 	buf := &a.doidAlloc
 	if len(*buf) == 0 {
 		*buf = make([]tree.DOid, datumAllocSize)
+	}
+	r := &(*buf)[0]
+	*r = v
+	*buf = (*buf)[1:]
+	return r
+}
+
+// NewDRange allocates a DRange.
+func (a *DatumAlloc) NewDRange(v tree.DRange) tree.Datum {
+	buf := &a.drangeAlloc
+	if len(*buf) == 0 {
+		*buf = make([]tree.DRange, datumAllocSize)
 	}
 	r := &(*buf)[0]
 	*r = v

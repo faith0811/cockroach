@@ -1654,6 +1654,7 @@ func (node *DTimestamp) String() string       { return AsString(node) }
 func (node *DTimestampTZ) String() string     { return AsString(node) }
 func (node *DTuple) String() string           { return AsString(node) }
 func (node *DArray) String() string           { return AsString(node) }
+func (node *DRange) String() string           { return AsString(node) }
 func (node *DOid) String() string             { return AsString(node) }
 func (node *DOidWrapper) String() string      { return AsString(node) }
 func (node *Exprs) String() string            { return AsString(node) }
